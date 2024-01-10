@@ -21,8 +21,15 @@ countPrinterErrors(control) should return "8/22"
 
  */
 
-function countPrinterErrors() {
+function countPrinterErrors(str) {
   // your solution here
+  // count the number of inorrect letters in the string.
+  const goodLetters = /[a-m]/i
+  let errors = Number()
+  for (letter of str) {
+    if (!goodLetters.test(letter)) errors++
+  }
+  return `${errors}/${str.length}`
 }
 
 runTest("countPrinterErrors() should return a string", function () {

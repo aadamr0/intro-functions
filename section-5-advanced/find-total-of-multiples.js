@@ -12,7 +12,16 @@ Additionally, if the number is negative, return 0.
 Note: If the number is a multiple of both 3 and 5, only count it once! */
 
 function findTotalOfMultiples(limit) {
-  // your solution
+  if (limit < 0) return 0
+
+  const multiples = Array()
+
+  for (let i = 0; i < limit; i++) {
+    if ((i % 3 === 0) || (i % 5 === 0)) {
+      multiples.push(i)
+    }
+  }
+  return multiples.reduce((previousValue, currentValue) => currentValue += previousValue)
 }
 
 runTest("findTotalOfMultiples() return zero for negative numbers", function () {

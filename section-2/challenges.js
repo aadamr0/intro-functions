@@ -5,6 +5,8 @@ const { check, runTest, skipTest } = require("../test-api/index.js");
 // This function should be called return the product of two passed numbers.
 
 // multiply() {}
+const multiply = (a, b) => a*b
+
 
 runTest("multiply() can multiply 2 numbers together", function () {
   check(multiply(3, 5)).isEqualTo(15);
@@ -15,10 +17,11 @@ runTest("multiply() can multiply 2 numbers together", function () {
 // Challenge 1
 
 // roundDown() {}
+const roundDown = (a)=> Math.floor(a);
 
 // This function should take a single argument and return its value rounded DOWN to the nearest integer.
 
-skipTest(
+runTest(
   "roundDown() returns the result of rounding down to the nearest integer",
   function () {
     check(roundDown(100.1)).isEqualTo(100);
@@ -31,9 +34,9 @@ skipTest(
 
 // This function should take two arguments, m and n, and return m raised to the power of n.
 
-// raiseToPower()
+const raiseToPower = (a, b) => a ** b;
 
-skipTest("raiseToPower() raises given number to the given power", function () {
+runTest("raiseToPower() raises given number to the given power", function () {
   check(raiseToPower(10, 3)).isEqualTo(1000);
   check(raiseToPower(25, 2)).isEqualTo(625);
   check(raiseToPower(10, 0)).isEqualTo(1);
@@ -43,9 +46,9 @@ skipTest("raiseToPower() raises given number to the given power", function () {
 
 // This function should take a number as an argument, and return true if it is a multiple of 6, and false otherwise.
 
-// isMultipleOf6()
+const isMultipleOf6 = (a) => a % 6 === 0;
 
-skipTest(
+runTest(
   "isMultipleOf6() should check if a number is divisible by 6",
   function () {
     check(isMultipleOf6(6)).isEqualTo(true);
@@ -61,9 +64,9 @@ skipTest(
 
 // This function should take a string as an argument and return the same string with the first letter capitalised.
 
-// capitaliseFirstLetter()
+const capitaliseFirstLetter=(str) => str[0].toUpperCase() + str.slice(1)
 
-skipTest(
+runTest(
   "capitaliseFirstLetter() capitalises the first letter in a string",
   function () {
     check(capitaliseFirstLetter("bang")).isEqualTo("Bang");
@@ -77,9 +80,9 @@ skipTest(
 // This function should take a number as an argument representing a year, 
 // and return true if that year is in the 20th century and false otherwise.
 
-// isInThe20thCentury()
+const isInThe20thCentury=(year) => year > 1900 && year <= 2000;
 
-skipTest(
+runTest(
   "isInThe20thCentury() checks if a number is within 1901 to 2000 (inclusive)",
   function () {
     check(isInThe20thCentury(1962)).isEqualTo(true);
@@ -98,7 +101,7 @@ skipTest(
 
 // HINT: all absolute file paths start with a /
 
-// isAbsolutePath()
+const isAbsolutePath=(str)=> str[0] === '/'
 
 skipTest(
   "isAbsolutePath() checks if a file path is absolute or relative",
@@ -125,9 +128,10 @@ The returned string should be in the following format:
 "The ASCII code for <character> is <character-code>"
 */
 
-// getCharCode()
+const getCharCode=(str)=>
+   "The ASCII code for " + str + " is " + str.charCodeAt();
 
-skipTest(
+runTest(
   "getCharCode() will return a message stating the ASCII code of a passed char",
   function () {
     check(getCharCode("A")).isEqualTo("The ASCII code for A is 65");
@@ -143,9 +147,9 @@ skipTest(
 
 // This function should take a length and a character as arguments and return an array of the given length populated with the given character.
 
-// createArray()
+const createArray=(len, char) => Array(len).fill(char);
 
-skipTest(
+runTest(
   "createArray() creates an array of the specified length using a specified character",
   function () {
     check(createArray(3, "!")).isEqualTo(["!", "!", "!"]);
@@ -164,9 +168,17 @@ If the battery level is 100% then it should return a string stating:
     "Fully charged :)"
 */
 
-// checkBatteryLevel()
+const checkBatteryLevel = (chargePercentage) => {
+  if (chargePercentage <= 5) {
+    return "Warning - battery level low: " + chargePercentage + "%, please charge your device"
+  } else if (chargePercentage > 5 && chargePercentage <= 99) {
+    return "Battery level: " + chargePercentage + "%"
+  } else if (chargePercentage === 100) {
+    return "Fully charged"
+  }
+}
 
-skipTest(
+runTest(
   "checkBatteryLevel() should return a message with info about the battery level",
   function () {
     check(checkBatteryLevel(100)).isEqualTo("Fully charged :)");
@@ -196,9 +208,10 @@ skipTest(
 
 // This function should take an array as an argument and return an array containing all string elements from the input (retaining the order)
 
-// collectStrings()
+const collectStrings=(arr)=> arr.filter(x => typeof x === 'string')
 
-skipTest("collectStrings() can get all the strings from an array", function () {
+
+runTest("collectStrings() can get all the strings from an array", function () {
   check(collectStrings(["a", "b", "c"])).isEqualTo(["a", "b", "c"]);
   check(collectStrings(["a", 10, "b", 1000, "c"])).isEqualTo(["a", "b", "c"]);
 });

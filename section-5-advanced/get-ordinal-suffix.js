@@ -8,9 +8,27 @@ This function should take a number as an argument and should return the correspo
 
 See here for more details: https://www.grammarly.com/blog/how-to-write-ordinal-numbers-correctly/
 */
+// all conditions. 1-9 is enough.
+// 1st
+// 2nd
+// 3rd
+// 4th...9th
 
 function getOrdinalSuffix(num) {
   // your solution here
+  switch (String(num).slice(-1)) {
+    case '1':
+      return 'st'
+      break;
+    case '2':
+      return 'nd'
+      break;
+    case '3':
+      return 'rd'
+      break;
+    default:
+      return 'th'
+  }
 }
 
 runTest("getOrdinalSuffix() returns 'st' when given 1", function () {

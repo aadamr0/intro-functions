@@ -1,9 +1,11 @@
 const { check, runTest, skipTest } = require("../test-api/index.js");
 
 // Exercise 11
-function checkIfPropertyExists() {
+function checkIfPropertyExists(obj, key) {
   // This function should take an object and a key as its arguments and return true if the input object contains the provided key and false otherwise
+  return obj.hasOwnProperty(key)
 }
+
 
 runTest(
   "checkIfPropertyExists() checks if a property exists inside an object",
@@ -21,11 +23,14 @@ runTest(
 );
 
 // Exercise 12
-function createObject() {
+function createObject(arr) {
   // This function should take an array consisting of two elements representing a key/ value pair as its argument and return an object with a single property based on the input
+let obj = {}
+obj[arr[0]] = arr[1]
+return obj
 }
 
-skipTest(
+runTest(
   "createObject() creates a new object from a key value pair",
   function () {
     check(createObject(["name", "shaq"])).isEqualTo({ name: "shaq" });
@@ -37,11 +42,12 @@ skipTest(
 );
 
 // Exercise 13
-function getFirstNItems() {
+function getFirstNItems(arr, n) {
   // This function should take two arguments, an array and a number 'n', and return a new array containing the first 'n' items of the given array
+  return arr.splice(0, n)
 }
 
-skipTest("getFirstNItems() returns the first n items in an array", function () {
+runTest("getFirstNItems() returns the first n items in an array", function () {
   check(getFirstNItems(["a", "b", "c", "d"], 2)).isEqualTo(["a", "b"]);
   check(getFirstNItems(["apple", "banana", "pear", "kiwi"], 0)).isEqualTo([]);
   check(getFirstNItems(["apple", "banana", "pear", "kiwi"], 3)).isEqualTo([
@@ -52,12 +58,19 @@ skipTest("getFirstNItems() returns the first n items in an array", function () {
 });
 
 // Exercise 14
-function createArrow() {
+function createArrow(value) {
   // This function should take a string representing a direction ("left", "right", "up" or "down") as its argument and return the corresponding arrow ("←", "→", "↑", "↓")
   // You don't need to utilise an object here, but think about how you could do so
+  let obj ={
+    left: '←',
+    right: "→",
+    up: "↑",
+    down: "↓"
+  }
+  return obj[value]
 }
 
-skipTest(
+runTest(
   "createArrow() will return an arrow pointing in the right direction",
   function () {
     check(createArrow("left")).isEqualTo("←");
@@ -68,11 +81,14 @@ skipTest(
 );
 
 // Exercise 15
-function moveItemToEnd() {
+function moveItemToEnd(arr, index) {
   // This function should take two arguments, an array and an index value, and should return a new array where the item that was previously at the given index is now at the end of the array
+  let newArr = arr.slice(0, index).concat(arr.slice(index+1))
+  newArr.push(arr[index])
+  return newArr
 }
 
-skipTest(
+runTest(
   "moveItemToEnd() removes an item at a given index and adds it to the end of the array",
   function () {
     check(moveItemToEnd(["a", "b", "c", "d"], 0)).isEqualTo([
@@ -97,7 +113,7 @@ skipTest(
 );
 
 // Exercise 16
-function updateUserAge() {
+function updateUserAge(user) {
   /*
   The user of our website is having a birthday!
 
@@ -117,9 +133,10 @@ function updateUserAge() {
 
   NOTE: This function does NOT need to return anything!
   */
+ user.personalDetails.age += 1
 }
 
-skipTest("updateUserAge() updates the user's age", function () {
+runTest("updateUserAge() updates the user's age", function () {
   const user1 = {
     admin: false,
     username: "xoxoAlexoxo",
@@ -166,12 +183,13 @@ skipTest("updateUserAge() updates the user's age", function () {
 });
 
 // Exercise 17
-function checkInfinitive() {
+function checkInfinitive(str) {
   // This function should take a string representing a French word as an argument, and return true if it is an infinitive verb, and false otherwise
   // A French infinitive verb is a word that ends with either "re", "ir" or "er"
+  return str.endsWith('er') || str.endsWith('ir') || str.endsWith('re')
 }
 
-skipTest(
+runTest(
   "checkInfinitive() checks if a french word is an infinitive",
   function () {
     check(checkInfinitive("manger")).isEqualTo(true);
@@ -190,11 +208,14 @@ skipTest(
 );
 
 // Exercise 18
-function collectPlurals() {
+function collectPlurals(stringsArray) {
   // This function should take an array of strings as an argument and return an array containing all strings ending with an 's' from the input (retaining the order)
+  return stringsArray.filter(string => {
+    return string.endsWith('s')
+  })
 }
 
-skipTest(
+runTest(
   "collectPlurals() can collect all the strings ending in an s",
   function () {
     check(
@@ -215,16 +236,20 @@ skipTest(
 );
 
 // Exercise 19
-function makeAllAdmins() {
+function makeAllAdmins(users) {
   /*
   This function should take an array of 'user' objects as an argument
   Each user will be an object with a 'name' and 'admin' property
   The 'admin' property will be a boolean value
   You should return an array of user objects each with the 'admin' property set to true
   */
+  return users.map(user => {
+    user['admin'] = true
+    return user
+  })
 }
 
-skipTest(
+runTest(
   "makeAllAdmins() updates the admin property for each user",
   function () {
     check(

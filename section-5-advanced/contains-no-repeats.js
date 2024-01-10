@@ -2,6 +2,7 @@ const { check, runTest } = require("../test-api/index");
 
 function containsNoRepeats(str) {
   // This function should take a string as its argument and return true if each character appears only once and false otherwise
+  return new Set(str).length === str.length
 }
 
 runTest("containsNoRepeats() returns true for an empty string", function () {

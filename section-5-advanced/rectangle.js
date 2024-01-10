@@ -11,7 +11,17 @@ For example, makeRectangle(3,5) should print a 3 by 5 rectangle of *, as shown b
 
 Try to complete this task without using for loops!
 */
+// no for loops.
+// print * m times. how?
+// do that command n times.
 
-function makeRectangle() {}
+function makeRectangle(m, n) {
+    let row = Array(m).fill('*')
+    if (n > 0) {
+        makeRectangle(m, n-1)
+        console.log(row.join(''))
+}
+}
 
 // invoke the function below to test it
+makeRectangle(3, 2)
